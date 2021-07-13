@@ -42,7 +42,7 @@ if __name__ == '__main__':
         dahua_data = eval(config["Dahua_cams"]["data"])  # dahua settings
 
     except Exception as e:
-        print(e)
+        print('[E]', e)
         print(f'[W] Проверьте настройки! {settings_path}')
         quit()
 
