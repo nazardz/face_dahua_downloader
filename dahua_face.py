@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     # параметры
     config = configparser.ConfigParser()
-    settings_path = "local/settings.ini"
+    settings_path = "local/settings.ini"  # полный путь /home/dan/PycharmProjects/dahua_face_int/local/settings.ini
     try:
         config.read(settings_path)
         PATH = config["Setting"]["PATH"]  # path name
