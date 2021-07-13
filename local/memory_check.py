@@ -23,7 +23,7 @@ def direcroty_size_check(dir_path, limit):
     return False if total_size >= limit * gigabyte else True
 
 
-# проверка на n дней
+# удаление файлов после х дней
 def remove_old_files(rootfolder, days, extension=".jpg"):
     current_time = time.time()
     for dirname, dirnames, filenames in os.walk(rootfolder):
