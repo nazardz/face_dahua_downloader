@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     # параметры
     config = configparser.ConfigParser()
-    settings_path = "local/settings.ini"  # полный путь /home/dan/PycharmProjects/dahua_face_int/local/settings.ini
+    settings_path = "local/settings.ini"    # /home/dan/PycharmProjects/face_dahua_downloader/local/settings.ini
     try:
         config.read(settings_path)
         PATH = config["Setting"]["PATH"]  # path name
@@ -67,7 +67,6 @@ if __name__ == '__main__':
                 STOP_SAVING_TEXT = True
                 # для камер в словаре
                 for camera in dahua_data['camera']:
-                    # класс для закачки изображении с дахуа
                     dd = downloader.DahuaDownloader(dahua_ip=camera['hostname'],  # адрес
                                                     dahua_login=camera['login'],  # логин
                                                     dahua_password=camera['password'],  # пароль
