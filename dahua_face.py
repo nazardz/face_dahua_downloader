@@ -1,8 +1,8 @@
 import os
 import time
 from datetime import datetime
-import local.memory_check as mc
-import local.dahua_downloader as downloader
+import utils.memory_check as mc
+import utils.dahua_downloader as downloader
 import configparser
 
 
@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     # параметры
     config = configparser.ConfigParser()
-    settings_path = "local/settings.ini"    # /home/dan/PycharmProjects/face_dahua_downloader/local/settings.ini
+    settings_path = "utils/settings.ini"  # /home/dan/PycharmProjects/face_dahua_downloader/utils/settings.ini
     try:
         config.read(settings_path)
         PATH = config["Setting"]["PATH"]  # path name

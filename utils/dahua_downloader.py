@@ -3,7 +3,7 @@ import requests
 from requests.auth import HTTPDigestAuth
 # import tqdm
 import os
-import local.memory_check as mc
+import utils.memory_check as mc
 
 
 class DahuaDownloader(object):
