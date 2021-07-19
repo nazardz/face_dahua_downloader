@@ -1,6 +1,7 @@
 import time
 import requests
 from requests.auth import HTTPDigestAuth
+from logzero import logger
 # import tqdm
 import os
 import utils.memory_check as mc
@@ -42,10 +43,12 @@ class DahuaDownloader(object):
                         # print("[W] Wrong response findFile method: " + response.text)
                         self.close_session()
                 else:
-                    print("[W] Wrong token: " + response.text)
+                    logger.warning(f'Wrong token: {response.text}')
+                    # print("[W] Wrong token: " + response.text)
                     return False
             else:
-                print("[W] Wrong auth: " + response.text)
+                logger.warning(f'Wrong auth: {response.text}')
+                # print("[W] Wrong auth: " + response.text)
                 return False
 
     def create_file_list(self):
@@ -67,10 +70,12 @@ class DahuaDownloader(object):
                             dahua_files.append({'file_name': file_name,
                                                 'file_length': file_length})
                         else:
-                            print('[W] Wrong findNextFile method' + file_info)
+                            logger.warning(f'Wrong findNextFile method: {file_info}')
+                            # print('[W] Wrong findNextFile method' + file_info)
                             pass
                     else:
-                        print('[W] Wrong file_info response: ' + file_info)
+                        logger.warning(f'Wrong file_info response: {file_info}')
+                        # print('[W] Wrong file_info response: ' + file_info)
                         break
             else:
                 break
@@ -89,10 +94,13 @@ class DahuaDownloader(object):
                 old_file = mc.oldest_file_in_tree(root_path)
                 os.remove(old_file)
             try:
+                mc.path_checker(self.output_path)
                 if os.path.exists(output_file_name) and str(os.stat(output_file_name).st_size) == file_length:
                     # print("[I] File {} exists, skipping!".format(output_file_name))
+                    logger.info(f'File {output_file_name} exists, skipping!')
                     pass
                 else:
+                    logger.info(f'Downloading {idx + 1} of {list_count} to {file_name}')
                     # print("[I] Downloading {} of {} to {}".format(idx + 1, list_count, file_name))
                     response = requests.get(rpc_dav_url, auth=self.auth, stream=True)
                     # total_size_in_bytes = int(response.headers.get('content-length', 0))

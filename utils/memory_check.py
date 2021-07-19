@@ -1,5 +1,6 @@
 import os
 import time
+from logzero import logger
 
 
 # найти старейшии файл (изображение)
@@ -32,3 +33,19 @@ def remove_old_files(rootfolder, days, extension=".jpg"):
                 creation_time = os.stat(os.path.join(dirname, filename)).st_mtime
                 if (current_time - creation_time) // (24 * 3600) >= days:
                     os.remove(os.path.join(dirname, filename))
+
+
+# проверка путей сохранения
+def path_checker(path_name):
+    try:
+        if not os.path.exists(path_name):
+            logger.info('Создание папки...')
+            # print('[I] Создание папки... ')
+            os.makedirs(path_name)
+            logger.info('Папка создана!')
+            # print('[I] Папка создана!')
+    except OSError:
+        logger.error(f'Ошибка создания папки: {path_name}')
+        # print('[E] Ошибка создания папки: {}'.format(path_name))
+        return False
+    return True
